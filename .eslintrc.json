@@ -1,3 +1,42 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "root": true,
+  "rules": {
+    "prefer-const": "off",
+    "react/button-has-type": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-empty-function": "error",
+    "@typescript-eslint/ban-ts-comment": "error",
+    "@typescript-eslint/no-extra-non-null-assertion": "error",
+    "no-async-promise-executor": "error",
+    "no-extra-boolean-cast": "error",
+    "no-console": [
+      "error",
+      {
+        "allow": ["error"]
+      }
+    ],
+    "no-else-return": "error",
+    "no-nested-ternary": "error",
+    "no-plusplus": "error",
+    "no-unneeded-ternary": [
+      "error",
+      {
+        "defaultAssignment": true
+      }
+    ],
+    "one-var-declaration-per-line": "error",
+    "react/jsx-props-no-spreading": 0,
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
+    "@next/next/no-img-element": "error",
+    "no-useless-escape": "error",
+    "no-useless-catch": "error",
+    "react-hooks/exhaustive-deps": "off"
+  }
 }
