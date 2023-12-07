@@ -1,0 +1,30 @@
+.navbar {
+  background-color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem 6rem;
+  gap: 3rem;
+  border-bottom: 1px solid var(--secondary-background);
+
+  &_menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+
+    &_sub {
+      display: flex;
+      flex-direction: column;
+
+      &_active {
+        position: relative;
+        top: 0.5rem;
+        height: 0.5rem;
+        width: 50%;
+        margin: 0 auto;
+        background-color: var(--primary-text);
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--third-background);
+  border: 1px solid var(--secondary-background);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+
+  &:active {
+    background-color: var(--third-soft-background);
+  }
+}
+
+.primary {
+  background-color: var(--primary-text);
+  color: var(--primary-background);
+
+  &:active {
+    background-color: var(--primary-soft-text);
+  }
+}
+
+.danger {
+  background-color: var(--red-soft-indicators);
+  color: var(--red-indicators);
+
+  &:active {
+    background-color: var(--red-second-soft-indicators);
+  }
+}

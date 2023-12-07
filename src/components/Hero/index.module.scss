@@ -1,0 +1,19 @@
+.hero {
+  background-color: white;
+  padding: 4rem 20rem;
+  border-bottom: 1px solid var(--secondary-background);
+}
+
+.heroDark {
+  background-color: var(--fourth-background);
+  color: white;
+  padding: 4rem 20rem;
+
+  h3 {
+    color: var(--blue-active-indicators);
+  }
+
+  h1 {
+    width: 50%;
+  }
+}

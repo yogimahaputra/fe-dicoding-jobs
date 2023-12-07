@@ -1,0 +1,23 @@
+:root {
+  --red-indicators: #e11d48;
+  --red-soft-indicators: #fecdd3;
+  --red-second-soft-indicators: #fbdfe2;
+  --green-indicators: #2a9928;
+  --yellow-indicators: #f4b63c;
+  --blue-active-indicators: #3b82f6;
+  --blue-active-soft-indicators: #eff6ff;
+
+  --primary-text: #2d3e50;
+  --primary-soft-text: rgb(59, 82, 109);
+  --primary-background: white;
+  --secondary-background: #e4e4e7;
+  --third-background: #fafafa;
+  --third-soft-background: #f0efef;
+  --fourth-background: #18181b;
+}
+
+[data-theme='dark'] {
+  --primary-text: white;
+  --primary-background: #242e42;
+  --secondary-background: #242e42;
+}
