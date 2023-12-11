@@ -7,11 +7,20 @@ import { LuPencil, LuUpload } from 'react-icons/lu';
 import { IoMdTime } from 'react-icons/io';
 import Button from '../Button';
 import { FaRegTrashAlt } from 'react-icons/fa';
+import { IVacancies } from '@/common/type/response';
+import { timestampOnlyDateUtils } from '@/common/utils/TimestampUtils';
 
 const { Div } = Container;
 const { Text, Small } = Typography;
 
-const CardDashboard = () => {
+const CardDashboard = ({
+  deleteAction,
+  editAction,
+  ...props
+}: IVacancies & {
+  deleteAction: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  editAction: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}) => {
   return (
     <Div className={styles.carddashboard}>
       <Image
@@ -23,22 +32,28 @@ const CardDashboard = () => {
         }
       />
       <Div className={styles.carddashboard_content}>
-        <Text strong>Product Engineer</Text>
+        <Text strong>{props.title}</Text>
         <Div className={styles.carddashboard_content_detail}>
           <Small>
             <LuUpload />
-            DIbuat: 15 Desember 2023
+            Dibuat: {timestampOnlyDateUtils(props.created_at?.toString()!)}
           </Small>
           <Small>
             <IoMdTime />
-            Aktif hingga: 30 Desember 2023
+            Aktif hingga: {timestampOnlyDateUtils(props.expiration_date?.toString()!)}
           </Small>
         </Div>
         <Div className={styles.carddashboard_content_action}>
-          <Button type="button" icon={<LuPencil />}>
+          <Button onClick={editAction} value={props.id} type="button" icon={<LuPencil />}>
             Edit
           </Button>
-          <Button type="button" danger icon={<FaRegTrashAlt />}>
+          <Button
+            onClick={deleteAction}
+            value={props.id}
+            type="button"
+            danger
+            icon={<FaRegTrashAlt />}
+          >
             Delete
           </Button>
         </Div>

@@ -8,11 +8,36 @@ import Image from 'next/image';
 import { FiMapPin } from 'react-icons/fi';
 import { FaRegBuilding } from 'react-icons/fa';
 import { FaUserFriends } from 'react-icons/fa';
+import { IQueryDetail } from '@/common/service/type';
+import { IVacancies } from '@/common/type/response';
+import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
+import Loader from '@/components/Spinner';
 
 const { CenterContent, Div } = Container;
 const { Small, Title, SubTitle, Text } = Typography;
 
 const DetailVacancies = () => {
+  const router = useRouter();
+  const getVacancyId = async () => {
+    const data = await fetch('http://localhost:8000/api/v1/vacancies/' + router.query.id);
+
+    if (!data) {
+      throw Error();
+    }
+
+    return await data.json();
+  };
+
+  const { isPending, data }: IQueryDetail<IVacancies> = useQuery({
+    queryKey: ['vacancy', router.query.id],
+    queryFn: getVacancyId,
+  });
+
+  if (isPending) {
+    return <Loader />;
+  }
+
   return (
     <Layout>
       <Hero>
@@ -28,7 +53,7 @@ const DetailVacancies = () => {
             />
           </Div>
           <Div className={styles.content}>
-            <Title>Product Engineer</Title>
+            <Title>{data?.title}</Title>
             <Div className={styles.row}>
               <Small>Sektor Bisnis: Technology</Small>
             </Div>
@@ -37,7 +62,7 @@ const DetailVacancies = () => {
                 <FaRegBuilding /> Dicoding Indonesia
               </Small>
               <Small>
-                <FiMapPin /> Bandung
+                <FiMapPin /> {data?.location_name}
               </Small>
               <Small>
                 <FaUserFriends /> 50-100 Karyawan
@@ -48,42 +73,20 @@ const DetailVacancies = () => {
       </Hero>
       <CenterContent>
         <Div className={styles.content}>
-          <Div>
-            <h1>Job Description</h1>
-            <div>
-              <p>
-                As a Product Engineer, you will be joining the Product & Engineering team
-                in building impactful products for Dicoding users. With your programming
-                skills, you will be responsible for creating great experiences for our
-                users.
-              </p>
-              <br />
-
-              <p>
-                We are looking for an engineer, who not only knows how to program with
-                good functionality, but also solves user problems. When building
-                dicoding.com, we always try to:
-              </p>
-              <br />
-
-              <ul>
-                <li>Give maximum impact from the solutions we built.</li>
-                <li>
-                  Live a balanced life (it is important for engineers to sleep well.)
-                </li>
-              </ul>
-            </div>
-          </Div>
+          <Div>{data?.description}</Div>
           <Div className={styles.additional}>
             <SubTitle>Informasi Tambahan</SubTitle>
             <Div className={styles.additional_content}>
               <Div>
                 <Text strong>Pengalaman bekerja</Text>
-                <Text>1-3 tahun</Text>
+                <Text>
+                  {data?.max_experience === 0 && 'Lebih dari '} {data?.min_experience}
+                  {data?.max_experience !== 0 ? `- ${data?.max_experience}` : ''} tahun
+                </Text>
               </Div>
               <Div>
                 <Text strong>Kandidat yang dibutuhkan</Text>
-                <Text>1 kandidat</Text>
+                <Text>{data?.amount_need_employee} kandidat</Text>
               </Div>
             </Div>
           </Div>

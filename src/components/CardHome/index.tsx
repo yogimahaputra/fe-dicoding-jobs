@@ -6,11 +6,13 @@ import styles from './index.module.scss';
 import { FiMapPin } from 'react-icons/fi';
 import { PiSuitcaseSimple } from 'react-icons/pi';
 import { FaRegBuilding } from 'react-icons/fa';
+import { IVacancies } from '@/common/type/response';
+import { timestampOnlyDateUtils } from '@/common/utils/TimestampUtils';
 
 const { Div } = Container;
 const { Text, Small } = Typography;
 
-const CardHome = () => {
+const CardHome = ({ ...props }: IVacancies) => {
   return (
     <Div className={styles.card}>
       <Div className={styles.card_image}>
@@ -24,27 +26,30 @@ const CardHome = () => {
         />
       </Div>
       <Div className={styles.card_content}>
-        <Text strong>Product Engineer</Text>
+        <Text strong>{props.title}</Text>
         <Div>
           <Div className={styles.card_content_row}>
             <Small>
               <FaRegBuilding /> Dicoding Indonesia
             </Small>
-            <Small>Full Time</Small>
+            <Small>{props.job_type}</Small>
           </Div>
           <Div className={styles.card_content_row}>
             <Small>
-              <FiMapPin /> Bandung
+              <FiMapPin /> {props.location_name}
             </Small>
             <Small>
-              <PiSuitcaseSimple /> 4 - 5 Tahun
+              <PiSuitcaseSimple /> {props.min_experience}{' '}
+              {props.max_experience !== 0 ? `- ${props.max_experience}` : ''} Tahun
             </Small>
           </Div>
         </Div>
       </Div>
       <Div className={styles.card_status_date}>
-        <Small>Dibuat pada 15 Desember 2023</Small>
-        <Small>Lamar Sebelum 15 Desember 2023</Small>
+        <Small>Dibuat pada {timestampOnlyDateUtils(props.created_at?.toString()!)}</Small>
+        <Small>
+          Lamar Sebelum {timestampOnlyDateUtils(props.expiration_date?.toString()!)}
+        </Small>
       </Div>
     </Div>
   );

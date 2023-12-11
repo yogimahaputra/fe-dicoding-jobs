@@ -40,16 +40,7 @@ const getLocation = async () => {
   return await data.json();
 };
 
-const Create = () => {
-  const [loading, setloading] = useState(false);
-  const { isError: isErrorPosition, data: dataPosition }: IQuery<IPositions[]> = useQuery(
-    { queryKey: ['position'], queryFn: getPosition },
-  );
-  const { data: dataLocation }: IQuery<ILocations[]> = useQuery({
-    queryKey: ['location'],
-    queryFn: getLocation,
-  });
-
+const Edit = () => {
   const [payload, setpayload] = useState<IVacancies>({
     amount_need_employee: '',
     description: '',
@@ -68,10 +59,51 @@ const Create = () => {
     title: '',
   });
 
-  const postData = async () => {
+  const router = useRouter();
+  const getVacancy = async () => {
+    const data = await fetch('http://localhost:8000/api/v1/vacancies/' + router.query.id);
+
+    if (!data) {
+      throw Error();
+    }
+
+    const vacanciesDetail = await data.json();
+    setpayload({
+      amount_need_employee: vacanciesDetail.amount_need_employee,
+      description: vacanciesDetail.description,
+      expiration_date: vacanciesDetail.expiration_date,
+      is_ranged_salary: vacanciesDetail.is_ranged_salary,
+      is_visible_salary: vacanciesDetail.is_visible_salary,
+      job_type: vacanciesDetail.job_type,
+      location_id: vacanciesDetail.location_id,
+      min_experience: vacanciesDetail.min_experience,
+      max_experience: vacanciesDetail.max_experience,
+      min_salary: vacanciesDetail.min_salary,
+      max_salary: vacanciesDetail.max_salary,
+      offers_remote_work: vacanciesDetail.offers_remote_work,
+      position_id: vacanciesDetail.position_id,
+      slug: vacanciesDetail.slug,
+      title: vacanciesDetail.title,
+    });
+  };
+
+  const [loading, setloading] = useState(false);
+  const { isError: isErrorPosition, data: dataPosition }: IQuery<IPositions[]> = useQuery(
+    { queryKey: ['position'], queryFn: getPosition },
+  );
+  const { data: dataLocation }: IQuery<ILocations[]> = useQuery({
+    queryKey: ['location'],
+    queryFn: getLocation,
+  });
+  const { isPending }: IQuery<IVacancies[]> = useQuery({
+    queryKey: ['vacancy', router.query.id],
+    queryFn: getVacancy,
+  });
+
+  const updateData = async () => {
     try {
-      await fetch('http://localhost:8000/api/v1/vacancies', {
-        method: 'POST',
+      await fetch('http://localhost:8000/api/v1/vacancies/' + router.query.id, {
+        method: 'PUT',
         headers: {
           'content-type': 'application/json',
         },
@@ -82,9 +114,8 @@ const Create = () => {
     }
   };
 
-  const router = useRouter();
   const mutation = useMutation({
-    mutationFn: postData,
+    mutationFn: updateData,
     onSuccess: () => {
       router.push('/dashboard');
       setloading(false);
@@ -156,6 +187,10 @@ const Create = () => {
       max: 0,
     },
   ];
+
+  if (isPending) {
+    return <Loader />;
+  }
 
   return (
     <Layout>
@@ -430,7 +465,7 @@ const Create = () => {
           </Div>
           <Div className={styles.form_action}>
             <Button primary type="submit">
-              Buat Lowongan
+              Update Lowongan
             </Button>
             <Button type="button">Batal</Button>
           </Div>
@@ -440,4 +475,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default Edit;
