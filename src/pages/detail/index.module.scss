@@ -1,0 +1,51 @@
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 0rem 2rem;
+
+  img {
+    border: 1px solid #eee;
+  }
+
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+
+      small {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+  }
+
+  .status_date {
+    color: #aaa;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.content {
+  padding: 4rem 0rem;
+}
+
+.additional {
+  margin-top: 5rem;
+
+  &_content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10rem;
+  }
+}
