@@ -10,9 +10,9 @@ import CardDashboard from '@/components/CardDashboard';
 import Image from 'next/image';
 
 const { CenterContent, Div } = Container;
-const { Text, SubTitle } = Typography;
+const { Text, SubTitle, LinkText } = Typography;
 
-const Home = () => {
+const Dashboard = () => {
   return (
     <Layout>
       <CenterContent>
@@ -36,9 +36,11 @@ const Home = () => {
           <Div className={styles.dashboard_content}>
             <Div className={styles.dashboard_content_header}>
               <SubTitle>Lowongan Saya</SubTitle>
-              <Button type="button" primary icon={<IoMdAdd />}>
-                Buat Lowongan
-              </Button>
+              <LinkText href="/dashboard/create">
+                <Button type="button" primary icon={<IoMdAdd />}>
+                  Buat Lowongan
+                </Button>
+              </LinkText>
             </Div>
             <Div className={styles.dashboard_content_list}>
               <CardDashboard />
@@ -50,4 +52,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Dashboard;

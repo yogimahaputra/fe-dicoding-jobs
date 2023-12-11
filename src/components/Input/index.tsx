@@ -1,10 +1,10 @@
-import React, { HTMLAttributes } from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import styles from './index.module.scss';
 
 const Input = ({
   icon,
   ...props
-}: HTMLAttributes<HTMLInputElement> & {
+}: InputHTMLAttributes<HTMLInputElement> & {
   icon?: JSX.Element | React.ReactNode;
 }) => {
   let stylesinput = [styles.wrapper_input];

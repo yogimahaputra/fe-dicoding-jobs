@@ -2,6 +2,19 @@
   background-color: white;
   padding: 4rem 20rem;
   border-bottom: 1px solid var(--secondary-background);
+
+  h1 {
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      object-fit: contain;
+      border-radius: 100%;
+      display: inline;
+    }
+  }
 }
 
 .heroDark {
@@ -14,6 +27,21 @@
   }
 
   h1 {
+    position: relative;
+    width: 70%;
+    font-weight: 500;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+
+    img {
+      object-fit: contain;
+      border-radius: 100%;
+    }
+  }
+
+  p {
     width: 50%;
   }
 }

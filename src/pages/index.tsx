@@ -7,6 +7,7 @@ import Typography from '@/components/Typography';
 import CardHome from '@/components/CardHome';
 import Input from '@/components/Input';
 import { IoSearchOutline } from 'react-icons/io5';
+import Image from 'next/image';
 
 const { CenterContent, Div } = Container;
 const { Title, LinkText, SubTitle } = Typography;
@@ -16,7 +17,17 @@ const Home = () => {
     <Layout>
       <Hero dark>
         <SubTitle>Dicoding Jobs</SubTitle>
-        <Title>Temukan lowongan yang cocok untuk kamu</Title>
+        <Title>
+          Temukan lowongan yang cocok untuk kamu
+          <Image
+            alt="image_hero"
+            width={200}
+            height={100}
+            src={
+              'https://res.cloudinary.com/dknud4pb7/image/upload/v1701936479/z6iyiaqvh1v4g3pkohmr.jpg'
+            }
+          />
+        </Title>
       </Hero>
       <CenterContent>
         <Div className={styles.header}>
