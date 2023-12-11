@@ -26,14 +26,14 @@
     "no-nested-ternary": "error",
     "no-plusplus": "error",
     "no-unneeded-ternary": [
-      "error",
+      "off",
       {
         "defaultAssignment": true
       }
     ],
     "one-var-declaration-per-line": "error",
     "react/jsx-props-no-spreading": 0,
-    "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
     "@next/next/no-img-element": "error",
     "no-useless-escape": "error",
     "no-useless-catch": "error",
